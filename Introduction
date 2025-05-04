@@ -35,3 +35,5 @@ Ansible architecture includes "modules"
 +Modules are pushed to target server and performs it's task and gets removed once done!
 
 Reference: Check different kind of modules from official documentation https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html
+
++When we want to perform some complex task ,we'll have to use different modules and write it down in required order and form the playbook, we can also use variables in playbook for repeating values
