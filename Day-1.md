@@ -119,4 +119,4 @@ Python is better when:
 
 ---
 
-Let me know if you'd like this exported as a `.md` file or if you want visual examples (e.g., diagrams or a sample playbook) to accompany the notes.
+
