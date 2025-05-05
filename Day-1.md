@@ -118,5 +118,7 @@ Python is better when:
   * **WinRM** for Windows systems
 
 ---
+## Ansible Installation
+* Reference : https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#id9
 
 
