@@ -10,3 +10,4 @@ Day-1
 * When to Use Python Over Ansible
 * Provisioning: Ansible vs Terraform
 * Important Ansible Internals
+* Ansible Installation
