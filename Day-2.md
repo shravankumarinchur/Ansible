@@ -1,63 +1,58 @@
 
 ---
 
-## 🗓️ Day 02 – SSH Authentication Methods & Passwordless Setup
+## 🗓️ Day 02 – SSH Authentication Methods & Ansible Inventory
 
 ---
 
-### 🔹 **Type 1: Key-based Authentication (Common in Cloud Environments)**
+### 🔹 **Type 1: Key-based Authentication (Cloud Environments)**
 
-**✅ Use Case:**
-When managing cloud servers like AWS EC2, SSH keys (`.pem`) are the default authentication method.
+#### ✅ Use Case:
 
----
+Cloud servers like AWS EC2 use SSH keys (`.pem`) for secure login.
 
-**📌 Connect from Control Node (Initial Login):**
+#### 📌 Initial Login from Control Node:
 
 ```bash
 ssh -i /path/to/key.pem ec2-user@<INSTANCE-PUBLIC-IP>
 ```
 
-> This uses the PEM file (private key) to log in.
+> Uses the PEM file (private key) for login.
 
----
-
-**📌 Set Up Passwordless SSH (Copy Public Key to Target Server):**
+#### 📌 Set Up Passwordless SSH:
 
 ```bash
 ssh-copy-id -f "-o IdentityFile=/path/to/key.pem" ec2-user@<INSTANCE-PUBLIC-IP>
 ```
 
-> This uploads your **control node’s** public key (`~/.ssh/id_rsa.pub`, etc.) to the **target server**, enabling key-based login.
-  i,e control node's public key (typically ~/.ssh/id_rsa.pub or similar) is copied to this file on the remote server : ~/.ssh/authorized_keys
----
+> This uploads the control node’s **public key** (typically `~/.ssh/id_rsa.pub`) to the remote node’s file:
+> `~/.ssh/authorized_keys`
 
-**✅ After Passwordless Setup – Login Command:**
+#### ✅ Login After Setup:
 
 ```bash
 ssh ec2-user@<INSTANCE-PUBLIC-IP>
 ```
 
-> Now you no longer need the PEM file for this host — SSH will use your local public key.
+> You can now SSH without the PEM file.
 
 ---
 
-### 🔹 **Type 2: Password-based Authentication (On-prem or Non-cloud VMs)**
+### 🔹 **Type 2: Password-based Authentication (On-premise VMs)**
 
-**✅ Use Case:**
-Used in on-premises or legacy systems where password login is enabled instead of SSH keys.
+#### ✅ Use Case:
 
----
+Used where password auth is enabled instead of PEM.
 
-**📌 Enable Password Auth:**
+#### 📌 Enable Password Authentication:
 
-Edit the SSH daemon config:
+Edit the SSH config:
 
 ```ini
 /etc/ssh/sshd_config
 ```
 
-Ensure these settings:
+Ensure the following entries:
 
 ```ini
 PasswordAuthentication yes
@@ -72,49 +67,38 @@ Restart SSH:
 sudo systemctl restart sshd
 ```
 
----
-
-**📌 Push Public Key to Server Using Password:**
+#### 📌 Set Up Passwordless SSH (Using Password):
 
 ```bash
 ssh-copy-id root@<PUBLIC-IP>
 ```
 
-> You'll be prompted for the root password once. After that, key-based login will work.
+> You'll be prompted for the password once, then key-based login will work.
 
----
-
-**✅ After Passwordless Setup – Login Command:**
+#### ✅ Login After Setup:
 
 ```bash
 ssh root@<PUBLIC-IP>
 ```
 
-> This now works **without entering the password**.
-
 ---
 
-### 🔹 **Note for Cloud Instances (like AWS EC2)**
+### 🔹 **Note for Cloud Instances (e.g., AWS EC2)**
 
-Cloud-init may override `sshd_config`. Check:
+In some cloud environments, `cloud-init` may override `sshd_config`. In that case:
 
 ```bash
 cd /etc/ssh/sshd_config.d/
-```
-
-Edit:
-
-```bash
 sudo vi 50-cloud-init.conf
 ```
 
-Set:
+Update the line:
 
 ```ini
 PasswordAuthentication yes
 ```
 
-Then restart:
+Then restart SSH:
 
 ```bash
 sudo systemctl restart sshd
@@ -122,52 +106,172 @@ sudo systemctl restart sshd
 
 ---
 
-## 💡 Summary
-
-| Step                         | Command                                                           |
-| ---------------------------- | ----------------------------------------------------------------- |
-| Initial login with PEM       | `ssh -i /path/to/key.pem ec2-user@<ip>`                           |
-| Copy key (cloud)             | `ssh-copy-id -f "-o IdentityFile=/path/to/key.pem" ec2-user@<ip>` |
-| Copy key (on-prem/password)  | `ssh-copy-id root@<ip>`                                           |
-| Login after passwordless set | `ssh ec2-user@<ip>` or `ssh root@<ip>`                            |
-
----
-
-Absolutely! Here's a short, clean version you can append to your GitHub notes:
-
----
-### NOTE:
 ### 🔹 Passwordless SSH for Specific Users
 
-* Passwordless SSH is **user-specific** — the public key is stored in:
+Passwordless SSH is **user-specific**. The public key gets stored in:
 
-  ```
-  /home/<username>/.ssh/authorized_keys
-  ```
+```bash
+/home/<username>/.ssh/authorized_keys
+```
 
-#### ✅ Steps to Set Up for Any User (e.g., `john`):
+#### ✅ Setup Example for a User (e.g., `john`):
 
-1. **Ensure user exists** on the remote machine:
+```bash
+# Ensure user exists
+ssh root@<REMOTE-IP> "id john || useradd john"
 
-   ```bash
-   ssh root@<REMOTE-IP> "id john || useradd john"
-   ```
+# Copy your key
+ssh-copy-id john@<REMOTE-IP>
 
-2. **Copy SSH public key** to that user:
-
-   ```bash
-   ssh-copy-id john@<REMOTE-IP>
-   ```
-
-3. **Login without password**:
-
-   ```bash
-   ssh john@<REMOTE-IP>
-   ```
-
-> SSH will now use your key for `john` instead of prompting for a password.
+# Login
+ssh john@<REMOTE-IP>
+```
 
 ---
 
+## 📘 Ansible Inventory Basics
 
+---
+
+### 🧾 What is Ansible Inventory?
+
+An **Ansible Inventory** is a file listing the managed nodes (IP addresses/usernames), which Ansible uses to execute tasks remotely.
+
+---
+
+### 📂 Inventory File Types
+
+1. **INI Format (Most common)** – `hosts.ini`, `inventory.ini`
+2. **YAML Format** – Also supported but less used
+
+> INI is preferred for its readability and ease of use.
+
+---
+
+### 📍 Inventory File Location
+
+* Use a **custom inventory file** and pass its path:
+
+  ```bash
+  ansible -i /path/to/inventory.ini ...
+  ```
+
+* Or use the **default inventory**:
+
+  ```bash
+  /etc/ansible/hosts
+  ```
+
+  > If not present, create it. Ansible will use this if `-i` isn't passed.
+
+---
+
+### 🧪 Example Inventory (INI Format)
+
+```ini
+root@10.168.5.33
+root@10.168.5.84
+```
+
+---
+
+### ▶️ Running Ad-hoc Commands
+
+**Syntax**:
+
+```bash
+ansible -i <inventory_file> -m <module> -a <arguments> <hosts>
+```
+
+#### Example – Ping All Nodes:
+
+```bash
+ansible -i inventory.ini -m ping all
+```
+
+#### Output:
+
+```json
+root@10.168.5.84 | SUCCESS => { "ping": "pong" }
+root@10.168.5.33 | SUCCESS => { "ping": "pong" }
+```
+
+---
+
+### ❌ Host Not in Inventory
+
+```bash
+ansible -i inventory.ini -m ping root@10.168.4.50
+```
+
+```plaintext
+[WARNING]: Could not match supplied host pattern, ignoring: root@10.168.4.50
+[WARNING]: No hosts matched, nothing to do
+```
+
+---
+
+### 🧭 Grouping Hosts in Inventory
+
+Use groups to organize nodes:
+
+```ini
+[app]
+root@10.168.5.33
+
+[db]
+root@10.168.5.84
+```
+
+#### Run Command on Specific Group:
+
+```bash
+ansible -i inventory.ini -m ping db
+```
+
+---
+
+### 🧰 How to Run Instructions in Ansible
+
+1. **Ad-hoc Commands** – For quick, one-liner tasks
+2. **Playbooks (YAML)** – Reusable scripts for complex automation
+
+---
+
+### 🧪 Example Task – List Files in `/etc`
+
+#### On `app` Group:
+
+```bash
+ansible -i inventory.ini -m shell -a "ls -l /etc/" app
+```
+
+#### On All Nodes:
+
+```bash
+ansible -i inventory.ini -m shell -a "ls -l /etc/" all
+```
+
+---
+
+### 📌 Ad-hoc Command Syntax Summary
+
+```bash
+ansible -i <inventory_file> -m <module> -a "<args>" <host/group>
+```
+
+#### Example:
+
+```bash
+ansible -i inventory.ini -m shell -a "apt update" all
+```
+
+---
+
+## 📚 References
+
+* 🔗 [Ansible Official Documentation](https://docs.ansible.com/)
+* 🔗 [Module Index](https://docs.ansible.com/ansible/latest/collections/index_module.html)
+
+---
 
