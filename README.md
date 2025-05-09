@@ -11,3 +11,13 @@ Day-1
 * Provisioning: Ansible vs Terraform
 * Important Ansible Internals
 * Ansible Installation
+
+Day 2
+* Passwordless SSH Setup
+* Ansible Inventory Management
+* Grouping and Targeting Hosts in Ansible Inventory
+* Understanding Ad-hoc Commands and Their Usage
+* Examples of Ad-hoc Commands for System Management Tasks
+
+
+
