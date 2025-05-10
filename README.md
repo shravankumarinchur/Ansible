@@ -21,3 +21,17 @@ Day 2
 
 
 
+ Day 3 
+
+* Learned the basics of **YAML** syntax (scalars, lists, dictionaries).
+* Understood how Ansible uses YAML to define **playbooks**.
+* Explored the structure of an Ansible playbook: `hosts`, `become`, `tasks`.
+* Wrote a playbook to **install Apache** and **deploy an HTML page**.
+* Executed **ad-hoc Ansible commands** to manage services (e.g., start/stop Apache).
+
+
+
+
+
+
+
