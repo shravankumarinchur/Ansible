@@ -29,6 +29,22 @@ Day 2
 * Wrote a playbook to **install Apache** and **deploy an HTML page** on AWS EC2 instance.
 * Executed **ad-hoc Ansible commands** to manage services (e.g., start/stop Apache).
 
+* Here are the **Day 4 content headlines** you can add to your `README.md` to summarize the day's learnings:
+
+
+ Day 04 
+
+*  Problem with large monolithic playbooks
+*  Introduction to Ansible Roles
+*  Understanding the Role Directory Structure:
+*  Converting an existing playbook into a role
+*  Example: Apache setup using a role
+*  Benefits: Modular, Reusable, Sharable (Ansible Galaxy)
+*  Idempotency in Ansible
+
+
+
+
 
 
 
