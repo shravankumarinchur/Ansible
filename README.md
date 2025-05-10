@@ -28,9 +28,7 @@ Day 2
 * Explored the structure of an Ansible playbook: `hosts`, `become`, `tasks`.
 * Wrote a playbook to **install Apache** and **deploy an HTML page** on AWS EC2 instance.
 * Executed **ad-hoc Ansible commands** to manage services (e.g., start/stop Apache).
-
-* Here are the **Day 4 content headlines** you can add to your `README.md` to summarize the day's learnings:
-
+ 
 
  Day 04 
 
