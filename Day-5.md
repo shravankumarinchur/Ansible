@@ -1,4 +1,3 @@
-Here's a detailed write-up for **Day 5 – Working with Ansible Galaxy**, covering all the points you've mentioned. You can directly add this to your GitHub repo's `README.md` or as a `day-5.md` file in a docs folder.
 
 ---
 
@@ -63,7 +62,7 @@ This installs the role in:
 ~/.ansible/roles/bsmeding.docker
 ```
 
-### 🔹 Step 2: Create Playbook
+### 🔹 Step 2: Create Playbook at any location 
 
 Create a playbook to use the downloaded role.
 
@@ -237,4 +236,3 @@ ansible-galaxy role import <github-username> <repo-name> --token <your-token>
 
 ---
 
-Let me know if you'd like this exported as a Markdown file or styled specifically for GitHub.
