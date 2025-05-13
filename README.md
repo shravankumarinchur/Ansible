@@ -40,6 +40,12 @@ Day 2
 *  Benefits: Modular, Reusable, Sharable (Ansible Galaxy)
 *  Idempotency in Ansible
 
+ Day  05
+*  Explore prebuilt roles 
+*  Setup Docker using existing roles
+*  Publish a role to ansible galaxy
+
+
 
 
 
