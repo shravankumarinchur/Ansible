@@ -45,6 +45,14 @@ Day 2
 *  Setup Docker using existing roles
 *  Publish a role to ansible galaxy
 
+  
+  Day 6
+* Introduced Ansible Collections for cloud and third-party integrations.
+* Used amazon.aws collection to provision an EC2 instance via Ansible.
+* Secured AWS credentials using Ansible Vault.
+* Resolved boto3/botocore dependency issues with Python 3.12.
+*  Learned 5 key methods to manage variables in Ansible with proper precedence:
+
 
 
 
