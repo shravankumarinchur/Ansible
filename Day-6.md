@@ -1,7 +1,7 @@
 
 ---
 
-# 📘 Day 7: Working with Ansible Collections, AWS EC2 creation Automation & Variable Precedence
+# 📘 Day 6: Working with Ansible Collections, AWS EC2 creation Automation & Variable Precedence
 
 ## 🔹 Why Collections?
 
