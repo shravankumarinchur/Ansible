@@ -1,7 +1,7 @@
 
 ---
 
-# 📘 Day 5 – Working with Ansible Galaxy
+#  Working with Ansible Galaxy
 
 ## 🌐 What is Ansible Galaxy?
 
