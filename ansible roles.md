@@ -1,7 +1,7 @@
 
 ---
 
-## 🗓️ Day 04 – Ansible Roles (Modular Playbook Design)
+## Ansible Roles (Modular Playbook Design)
 
 ---
 
