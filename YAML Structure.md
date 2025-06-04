@@ -1,7 +1,7 @@
 
 ---
 
-## 🗓️ Day 03 – YAML, Ansible Playbook Structure, and Apache Setup
+## YAML, Ansible Playbook Structure, and Apache Setup
 
 ---
 
