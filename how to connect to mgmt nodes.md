@@ -1,7 +1,7 @@
 
 ---
 
-## 🗓️ Day 02 – SSH Authentication Methods, Passwordless Setup & Ansible Inventory
+##   SSH Authentication Methods, Passwordless Setup & Ansible Inventory
 
 ---
 
