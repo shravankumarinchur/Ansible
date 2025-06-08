@@ -53,6 +53,15 @@ Day 2
 * Resolved boto3/botocore dependency issues with Python 3.12.
 *  Learned 5 key methods to manage variables in Ansible with proper precedence:
 
+ Day 07
+* Created IAM user with EC2 full access and secured keys using ansible-vault.
+* Automated EC2 instance provisioning with amazon.aws.ec2_instance module using loops and unique naming.
+* Setup passwordless SSH login to EC2 instances for smooth Ansible runs.
+* Used Ansible conditionals (when) to shutdown Ubuntu instances selectively.
+* Gathered system facts and filtered specific details using the debug module.
+* Executed shell commands on remote hosts, captured output, and displayed results.
+* Best practice reminders on idempotency and region-specific AMI usage.
+
 
 
 
