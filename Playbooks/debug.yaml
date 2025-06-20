@@ -1,0 +1,11 @@
+---
+
+- name: test connectivity
+  hosts: localhost
+
+  tasks:
+   - name: Test connectivity
+     ping:
+
+   - name: printing
+     debug: msg="testing" 
