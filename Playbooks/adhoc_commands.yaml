@@ -1,0 +1,27 @@
+ ansible -i inventory.ini  -m ansible.builtin.service -a "name=httpd state=restarted" all
+ ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=lastest" app
+ ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=lastest" all
+ ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=latest" app
+ ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=latest" db
+ ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=latest" all
+ ansible -i inventory.ini  -m ansible.builtin.service -a "name=httpd state=restarted" all
+
+
+ansible -i inventory2.ini -m ansible.buitin.dnf -a "name=httpd state=removed" app
+ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=removed" app
+ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=removed" db
+ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=removed" all
+ansible -i inventory2.ini -m ansible.builtin.dnf -a "name=httpd state=latest" all
+
+
+
+Example inventory file :
+cat inventory2.ini 
+[app]
+10.168.5.33
+
+[db]
+10.168.5.84
+
+ 
+
