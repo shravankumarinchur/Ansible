@@ -1,0 +1,16 @@
+---
+
+- name: start httpd
+  hosts: all
+
+  tasks:
+   - name: install http package
+     dnf:
+      name: httpd
+      state: latest
+   - name: start httpd service
+     service: 
+      name: httpd
+      state: started
+
+# NOTE: Task name and module used in that task should be on same level
