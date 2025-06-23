@@ -62,6 +62,12 @@ Day 2
 * Executed shell commands on remote hosts, captured output, and displayed results.
 * Best practice reminders on idempotency and region-specific AMI usage.
 
+ Day 08
+* Learned Ansible's default task execution order 
+* Used ignore_errors: yes to allow playbook continuation despite individual task failures.
+* Used register and when to conditionally run tasks based on command results (e.g., install Docker only if not installed).
+* Handled specific error types using failed_when for fine-grained control over task failure logic.
+
 
 
 
